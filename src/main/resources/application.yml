@@ -1,0 +1,14 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: >-
+              1030391838378-6ohfffk4poldo1f08192q5unvsg6ih26.apps.googleusercontent.com
+            client-secret: ${GOOGLE_SECRET}
+  datasource:
+    url: jdbc:mysql://aws-sa-east-1.connect.psdb.cloud/booknook?sslMode=VERIFY_IDENTITY
+    username: nyi8bj0ozy7st97wrafr
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
