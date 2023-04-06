@@ -3,9 +3,12 @@ package com.luizhf42.BookNook.controllers;
 import com.luizhf42.BookNook.models.User;
 import com.luizhf42.BookNook.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -26,7 +29,9 @@ public class UsersController {
     }
 
     @PostMapping("/create")
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public ResponseEntity<Object> createUser(@RequestBody User user) {
+        userRepository.save(user);
+        URI uri = URI.create("http://localhost:8080/users/" + user.getId());
+        return ResponseEntity.created(uri).body(user);
     }
 }
