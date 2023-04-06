@@ -18,6 +18,13 @@ public class UsersController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getUserById(@PathVariable String id) {
+        Optional<User> user = userRepository.findById(id);
+
+        return user.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
+    }
+
     @PostMapping("/create")
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
