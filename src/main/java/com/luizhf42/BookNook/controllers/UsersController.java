@@ -30,6 +30,9 @@ public class UsersController {
 
     @PostMapping("/create")
     public ResponseEntity<Object> createUser(@RequestBody User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            return ResponseEntity.status(409).body("Username already exists");
+        }
         userRepository.save(user);
         URI uri = URI.create("http://localhost:8080/users/" + user.getId());
         return ResponseEntity.created(uri).body(user);
